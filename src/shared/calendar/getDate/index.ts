@@ -9,23 +9,16 @@ const useGetDate = () => {
         months: monthsOfYear,
         monthsMin: monthsOfYear.map((month) => month.slice(0, 3)),
     });
-    const [daysOfMonth, setDaysOfMonth] = useState({
-        endDay: moment().endOf('month').endOf('week'),
-        startDay: moment().startOf('month').startOf('week')
-    });
+    const [firstDayOfMonth, setFirstDayOfMonth] = useState(moment().startOf('month').startOf('week'));
 
     useEffect(() => {
         const calculateDaysOfMonth = () => {
-            setDaysOfMonth({
-                endDay: moment().endOf('month').endOf('week'),
-                startDay: moment().startOf('month').startOf('week'),
-            });
+            setFirstDayOfMonth(moment().startOf('month').startOf('week'));
         };
-
         calculateDaysOfMonth();
     }, []);
 
-    return daysOfMonth;
+    return firstDayOfMonth;
 };
 
 export default useGetDate;

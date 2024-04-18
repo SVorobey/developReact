@@ -1,12 +1,12 @@
-import { Cells, CellsWrapper, RowInCell, DayWrapper } from "./styles";
-import useGetDate from "@shared/getDate";
+import moment from "moment";
+import { Cells, CellsWrapper, RowInCell, DayWrapper, CurrentDay } from "./styles";
 
-export const CalendarCells = () => {
-    const firstLastDay = useGetDate();
-    const day = firstLastDay.startDay.clone().subtract(1, 'day');
+type Props = {
+    day: moment.Moment,
+}
+
+export const CalendarCells:React.FC<Props> = ({day}) => {
     const calendarDays = [...Array(42)].map(() => day.add(1, 'day').clone());
-
-    console.log(calendarDays);
   return (
     <CellsWrapper>
         {
@@ -16,7 +16,7 @@ export const CalendarCells = () => {
                         justifyContent={'flex-end'}
                     >
                         <DayWrapper>
-                            {item.format('D')}
+                            {moment().isSame(item, 'day') ? <CurrentDay>{item.format('D')}</CurrentDay> : item.format('D')}
                         </DayWrapper>
                     </RowInCell>
                 </Cells>

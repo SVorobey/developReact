@@ -10,7 +10,7 @@ export const ButtonGroup = ({data}:Props) => {
     <ButtonWrapper>
         {
             data.map((item) => (
-                <Button key={item.label}>
+                <Button key={item.label} onClick={item.onClick}>
                     {item.label}
                 </Button>
             ))
