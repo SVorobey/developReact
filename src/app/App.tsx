@@ -1,10 +1,10 @@
-import { CalendarEgar } from "@widgets/calendar";
 import './styles.scss';
+import { Router } from "./routes/routes";
 
 function App() {
   return (
     <>
-      <CalendarEgar />
+      <Router />
     </>
   )
 }

@@ -1,10 +1,13 @@
-import { pressNextButton } from "@shared/calendar/nextButton";
-import { pressPreviousButton } from "@shared/calendar/previousButton";
-import { pressTodayButton } from "@shared/calendar/todayButton";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { currentDay, nextDay, prevDay } from "@entities/calendar/model";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
-export type Data = {
+export interface Data {
     label: string,
-    onClick?: () => void,
+}
+
+export interface ButtonsData extends Data {
+    action: ActionCreatorWithPayload<any>,
 }
 
 export const monthWeekData:Data[] = [
@@ -16,17 +19,17 @@ export const monthWeekData:Data[] = [
     },
 ];
 
-export const currentPrevNext:Data[] = [
+export const currentPrevNext:ButtonsData[] = [
     {
         label: 'Предыдущий',
-        onClick: () => pressPreviousButton,
+        action: prevDay,
     },
     {
         label: 'Сегодня',
-        onClick: () => pressTodayButton,
+        action: currentDay,
     },
     {
         label: 'Следующий',
-        onClick: () => pressNextButton,
+        action: nextDay,
     },
 ]

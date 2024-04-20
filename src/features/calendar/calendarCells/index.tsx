@@ -1,19 +1,21 @@
 import moment from "moment";
 import { Cells, CellsWrapper, RowInCell, DayWrapper, CurrentDay } from "./styles";
 
+
 type Props = {
-    day: moment.Moment,
+    fulldate: string,
 }
 
-export const CalendarCells:React.FC<Props> = ({day}) => {
+export const CalendarCells:React.FC<Props> = ({fulldate}) => {
+    const day = moment(fulldate).startOf('month').startOf('week');
     const calendarDays = [...Array(42)].map(() => day.add(1, 'day').clone());
   return (
     <CellsWrapper>
         {
             calendarDays.map((item) => (
-                <Cells key={item.format('DDMMYYY')} isWeekend={item.day() === 6 || item.day() === 0}>
+                <Cells key={item.unix()} isweekend={(item.day() === 6 || item.day() === 0) ? 'true' : 'false'}>
                     <RowInCell
-                        justifyContent={'flex-end'}
+                        justifycontent={'flex-end'}
                     >
                         <DayWrapper>
                             {moment().isSame(item, 'day') ? <CurrentDay>{item.format('D')}</CurrentDay> : item.format('D')}

@@ -1,15 +1,17 @@
 import { CalendarCells } from "@features/calendar/calendarCells"
 import { CalendarHeader } from "@features/calendar/calendarHeader"
 import { CalendarWrapper } from "./styles"
-import useGetDate from "@shared/calendar/getDate";
+import { useAppSelector } from "@shared/hooks/reduxHooks"
+import { fullDateSelector, monthYearSelector } from "@entities/calendar/model"
 
 export const CalendarEgar = () => {
-    const firstLastDay = useGetDate();
-    const day = firstLastDay.clone().subtract(1, 'day');
+  const currentDate = useAppSelector(fullDateSelector);
+  const currentMonthYear = useAppSelector(monthYearSelector);
+
   return (
     <CalendarWrapper>
-        <CalendarHeader day={day} />
-        <CalendarCells day={day} />
+        <CalendarHeader currentmonthyear={currentMonthYear} />
+        <CalendarCells fulldate={currentDate} />
     </CalendarWrapper>
   )
 }
