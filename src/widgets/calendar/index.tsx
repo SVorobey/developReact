@@ -1,4 +1,4 @@
-import { CalendarCells } from "@features/calendar/calendarCells"
+import { CalendarCellsMonth } from "@features/calendar/calendarCellsMonth"
 import { CalendarHeader } from "@features/calendar/calendarHeader"
 import { CalendarWrapper } from "./styles"
 import { useAppSelector } from "@shared/hooks/reduxHooks"
@@ -11,7 +11,7 @@ export const CalendarEgar = () => {
   return (
     <CalendarWrapper>
         <CalendarHeader currentmonthyear={currentMonthYear} />
-        <CalendarCells fulldate={currentDate} />
+        <CalendarCellsMonth fulldate={currentDate} />
     </CalendarWrapper>
   )
 }

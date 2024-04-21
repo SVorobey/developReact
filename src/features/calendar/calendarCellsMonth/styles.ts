@@ -3,12 +3,12 @@ import styled from 'styled-components';
 type Props = {
     justifycontent?: string,
     isweekend?: string,
+    isCurrentMonth?: string,
 }
 
 export const CellsWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(6, 1fr);
     grid-gap: 4px;
     background: #F7F7F7;
 `;
@@ -17,7 +17,7 @@ export const Cells = styled.div<Props>`
     min-width: 140px;
     min-height: 100px;
     background: ${props => props.isweekend === 'true' ? '#F9F9F9' : '#FFF'};
-    color: #000;
+    color: ${props => props.isCurrentMonth === 'true' ? '#000' : '#A9A9A9'};
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 5px;
 `;
@@ -45,4 +45,18 @@ export const CurrentDay = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+`;
+
+export const WeekDaysWrapper = styled(Cells)`
+    min-height: 40px;
+    grid-gap: 0;
+    color: #000;
+`;
+
+export const DayInHeader = styled(RowInCell)`
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: 10px;
+    font-size: 20px;
 `;
