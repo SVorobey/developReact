@@ -10,7 +10,6 @@ type Props = {
 export const CalendarCellsMonth:React.FC<Props> = ({fulldate}) => {
     const day = moment(fulldate).startOf('month').startOf('week');
     const calendarDays = [...Array(42)].map(() => day.add(1, 'day').clone());
-    console.log(moment().month());
   return (
     <CellsWrapper>
         {

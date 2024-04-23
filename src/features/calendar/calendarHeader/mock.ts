@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { currentDay, nextDay, prevDay } from "@entities/calendar/model";
+import { currentMonth, nextMonth, prevMonth } from "@entities/calendar/model";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
 export interface Data {
@@ -22,14 +22,14 @@ export const monthWeekData:Data[] = [
 export const currentPrevNext:ButtonsData[] = [
     {
         label: 'Предыдущий',
-        action: prevDay,
+        action: prevMonth,
     },
     {
         label: 'Сегодня',
-        action: currentDay,
+        action: currentMonth,
     },
     {
         label: 'Следующий',
-        action: nextDay,
+        action: nextMonth,
     },
 ]
