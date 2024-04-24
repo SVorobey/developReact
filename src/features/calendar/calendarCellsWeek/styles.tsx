@@ -26,7 +26,18 @@ export const DayInHeader = styled.div`
 export const CellsWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-gap: 4px;
+    grid-template-rows: repeat(25, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    .div1 {
+        grid-area: 1 / 1 / 2 / 9;
+    }
+    .div2 {
+        grid-area: 2 / 1 / 26 / 2; 
+    }
+    .div3 {
+        grid-area: 2 / 2 / 26 / 9;
+    }
 `;
 
 export const TimeDiv = styled.div`
@@ -39,9 +50,15 @@ export const Cells = styled.div`
     min-height: 100px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const WeekWrapper = styled(WeekDaysWrapper)<Props>`
     background: ${props => props.isweekend === 'true' ? '#F9F9F9' : '#FFF'};
     color: ${props => props.isCurrentMonth === 'true' ? '#000' : '#A9A9A9'};
+`;
+
+export const TimeWrapper = styled.div`
 `;
