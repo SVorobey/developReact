@@ -4,6 +4,7 @@ import { WeekDaysWrapper } from "../calendarCellsMonth/styles";
 type Props = {
     isweekend?: string,
     isCurrentMonth?: string,
+    isCurrentDay?: string,
 }
 
 export const Number = styled.p`
@@ -20,24 +21,13 @@ export const DayName = styled.p`
 export const DayInHeader = styled.div`
     display: flex;
     align-items: flex-start;
-    padding: 10px 0 0 10px;
+    padding: 40px 0 0 40px;
 `;
 
 export const CellsWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(25, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    .div1 {
-        grid-area: 1 / 1 / 2 / 9;
-    }
-    .div2 {
-        grid-area: 2 / 1 / 26 / 2; 
-    }
-    .div3 {
-        grid-area: 2 / 2 / 26 / 9;
-    }
 `;
 
 export const TimeDiv = styled.div`
@@ -45,11 +35,12 @@ export const TimeDiv = styled.div`
     font-size: 20px
 `;
 
-export const Cells = styled.div`
+export const Cells = styled.div<Props>`
     min-width: 140px;
     min-height: 100px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 5px;
+    border-top: ${props => props.isCurrentDay === 'true' ? '2px solid #1677FF' : 'none'};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,4 +52,22 @@ export const WeekWrapper = styled(WeekDaysWrapper)<Props>`
 `;
 
 export const TimeWrapper = styled.div`
+    grid-area: 2 / 1 / 26 / 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(24, 1fr);
+`;
+
+export const EventWrapper = styled.div`
+    grid-area: 2 / 2 / 26 / 9;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(24, 1fr);
+`;
+
+export const HeaderWrapper = styled.div`
+    grid-area: 1 / 1 / 2 / 9;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: 1fr;
 `;
