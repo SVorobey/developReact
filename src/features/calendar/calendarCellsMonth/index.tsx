@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const CalendarCellsMonth:React.FC<Props> = ({fulldate}) => {
-    const day = moment(fulldate).startOf('month').startOf('week');
+    const day = moment(fulldate).startOf('month').startOf('week').day() === 0 ? moment(fulldate).startOf('month').subtract(1, 'day').startOf('week') : moment(fulldate).startOf('month').startOf('week');
     const calendarDays = [...Array(42)].map(() => day.add(1, 'day').clone());
   return (
     <CellsWrapper>

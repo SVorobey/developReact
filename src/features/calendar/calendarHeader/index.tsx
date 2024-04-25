@@ -12,7 +12,7 @@ export const CalendarHeader:React.FC<Props> = ({currentmonthyear}) => {
     <CalendarHeaderWrapper>
         <ButtonGroup data={currentPrevNext} />
         <StyledText>
-            {currentmonthyear}
+          {currentmonthyear}
         </StyledText>
         <RadioGroup data={monthWeekData} />
     </CalendarHeaderWrapper>

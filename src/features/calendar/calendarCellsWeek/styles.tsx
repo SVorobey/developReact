@@ -3,25 +3,24 @@ import { WeekDaysWrapper } from "../calendarCellsMonth/styles";
 
 type Props = {
     isweekend?: string,
-    isCurrentMonth?: string,
-    isCurrentDay?: string,
 }
 
-export const Number = styled.p`
+export const Number = styled.div`
     font-size: 20px;
-    color: #000;
-    margin-right: 5px;
+    margin-right: 10px;
 `;
 
 export const DayName = styled.p`
     font-size: 10px;
-    color: #000;
+    margin-bottom: 15px;
 `;
 
-export const DayInHeader = styled.div`
+export const DayInHeader = styled.div<Props>`
+    width: 100%;
+    height: 100%;
     display: flex;
-    align-items: flex-start;
-    padding: 40px 0 0 40px;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const CellsWrapper = styled.div`
@@ -35,12 +34,11 @@ export const TimeDiv = styled.div`
     font-size: 20px
 `;
 
-export const Cells = styled.div<Props>`
+export const Cells = styled.div`
     min-width: 140px;
     min-height: 100px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 5px;
-    border-top: ${props => props.isCurrentDay === 'true' ? '2px solid #1677FF' : 'none'};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,7 +46,6 @@ export const Cells = styled.div<Props>`
 
 export const WeekWrapper = styled(WeekDaysWrapper)<Props>`
     background: ${props => props.isweekend === 'true' ? '#F9F9F9' : '#FFF'};
-    color: ${props => props.isCurrentMonth === 'true' ? '#000' : '#A9A9A9'};
 `;
 
 export const TimeWrapper = styled.div`
@@ -70,4 +67,16 @@ export const HeaderWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: 1fr;
+`;
+
+export const CurrentDay = styled.div`
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    background: red;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -3px;
 `;

@@ -1,8 +1,7 @@
 import moment from "moment";
 import { WeekDaysWrapper } from "../calendarCellsMonth/styles";
-import { DayInHeader, CellsWrapper, WeekWrapper, Cells, TimeWrapper, HeaderWrapper, EventWrapper } from "./styles";
+import { DayInHeader, CellsWrapper, WeekWrapper, Cells, TimeWrapper, HeaderWrapper, EventWrapper, CurrentDay, Number, DayName } from "./styles";
 import { daysOfWeek, time } from "@app/momentConfig";
-import { Number, DayName } from "./styles";
 
 
 type Props = {
@@ -18,19 +17,18 @@ export const CalendarCellsWeek:React.FC<Props> = ({fulldate}) => {
         <WeekDaysWrapper />
         {
             calendarDays.map((item, index) => (
-                <WeekWrapper
+              <WeekWrapper
                 isweekend={(item.day() === 6 || item.day() === 0) ? 'true' : 'false'}
-                isCurrentMonth={item.month() === moment(fulldate).month() ? 'true' : 'false'}
-                >
-                  <DayInHeader>
-                    <Number>
-                        {item.format('D')}
-                    </Number>
-                    <DayName>
-                        {daysOfWeek[index].toUpperCase()}
-                    </DayName>
-                  </DayInHeader>
-                </WeekWrapper>
+              >
+                <DayInHeader>
+                  <Number>
+                    {moment().isSame(item, 'day') ? <CurrentDay>{item.format('D')}</CurrentDay> : item.format('D')}
+                  </Number>
+                  <DayName>
+                      {daysOfWeek[index].toUpperCase()}
+                  </DayName>
+                </DayInHeader>
+              </WeekWrapper>
             ))
         }
       </HeaderWrapper>

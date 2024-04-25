@@ -28,32 +28,29 @@ export const calendarSlice = createSlice({
     name: 'calendar',
     initialState,
     reducers: {
-        nextMonth: (state, action) => {
-            state.fullDate = moment(action.payload).clone().add(1, 'month').format('YYYY-MM-DD');
-            state.day = moment(action.payload).clone().add(1, 'month').format('D');
-            state.monthYear = moment(action.payload).clone().add(1, 'month').format('MMMM YYYY');
+        next: (state, action) => {
+            if (state.selectedView === 'month') {
+                state.fullDate = moment(action.payload).clone().add(1, 'month').format('YYYY-MM-DD');
+                state.day = moment(action.payload).clone().add(1, 'month').format('D');
+                state.monthYear = moment(action.payload).clone().add(1, 'month').format('MMMM YYYY');
+            } else {
+                state.fullDate = moment(action.payload).clone().add(1, 'week').format('YYYY-MM-DD');
+                state.day = moment(action.payload).clone().add(1, 'week').format('D');
+                state.monthYear = moment(action.payload).clone().add(1, 'week').format('MMMM YYYY');
+            }
         },
-        prevMonth: (state, action) => {
-            state.fullDate = moment(action.payload).clone().subtract(1, 'month').format('YYYY-MM-DD');
-            state.day = moment(action.payload).clone().subtract(1, 'month').format('D');
-            state.monthYear = moment(action.payload).clone().subtract(1, 'month').format('MMMM YYYY');
+        previous: (state, action) => {
+            if (state.selectedView === 'month') {
+                state.fullDate = moment(action.payload).clone().subtract(1, 'month').format('YYYY-MM-DD');
+                state.day = moment(action.payload).clone().subtract(1, 'month').format('D');
+                state.monthYear = moment(action.payload).clone().subtract(1, 'month').format('MMMM YYYY');  
+            } else {
+                state.fullDate = moment(action.payload).clone().subtract(1, 'week').format('YYYY-MM-DD');
+                state.day = moment(action.payload).clone().subtract(1, 'week').format('D');
+                state.monthYear = moment(action.payload).clone().subtract(1, 'week').format('MMMM YYYY');
+            }
         },
-        currentMonth: (state) => {
-            state.fullDate = moment().clone().format('YYYY-MM-DD');
-            state.day = moment().clone().format('D');
-            state.monthYear = moment().clone().format('MMMM YYYY');
-        },
-        nextWeek: (state, action) => {
-            state.fullDate = moment(action.payload).clone().add(1, 'week').format('YYYY-MM-DD');
-            state.day = moment(action.payload).clone().add(1, 'week').format('D');
-            state.monthYear = moment(action.payload).clone().add(1, 'week').format('MMMM YYYY');
-        },
-        prevWeek: (state, action) => {
-            state.fullDate = moment(action.payload).clone().subtract(1, 'week').format('YYYY-MM-DD');
-            state.day = moment(action.payload).clone().subtract(1, 'week').format('D');
-            state.monthYear = moment(action.payload).clone().subtract(1, 'week').format('MMMM YYYY');
-        },
-        currentWeek: (state) => {
+        current: (state) => {
             state.fullDate = moment().clone().format('YYYY-MM-DD');
             state.day = moment().clone().format('D');
             state.monthYear = moment().clone().format('MMMM YYYY');
@@ -64,8 +61,9 @@ export const calendarSlice = createSlice({
     },
 })
 
-export const { nextMonth, prevMonth, currentMonth } = calendarSlice.actions;
+export const { next, previous, current, selectView } = calendarSlice.actions;
 export const daySelector = (state: RootState) => state.calendar.day;
 export const fullDateSelector = (state: RootState) => state.calendar.fullDate;
 export const monthYearSelector = (state: RootState) => state.calendar.monthYear;
+export const viewSelector = (state: RootState) => state.calendar.selectedView;
 export default calendarSlice.reducer;

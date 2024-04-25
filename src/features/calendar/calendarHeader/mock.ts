@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { currentMonth, nextMonth, prevMonth } from "@entities/calendar/model";
+import { current, next, previous, selectView } from "@entities/calendar/model";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
 export interface Data {
     label: string,
+    action?: ActionCreatorWithPayload<any, string>,
+    id?: string,
 }
 
 export interface ButtonsData extends Data {
@@ -13,23 +15,27 @@ export interface ButtonsData extends Data {
 export const monthWeekData:Data[] = [
     {
         label: 'Месяц',
+        action: selectView,
+        id: 'month',
     },
     {
         label: 'Неделя',
+        action: selectView,
+        id: 'week',
     },
 ];
 
 export const currentPrevNext:ButtonsData[] = [
     {
         label: 'Предыдущий',
-        action: prevMonth,
+        action: previous,
     },
     {
         label: 'Сегодня',
-        action: currentMonth,
+        action: current,
     },
     {
         label: 'Следующий',
-        action: nextMonth,
+        action: next,
     },
 ]
