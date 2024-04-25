@@ -1,6 +1,7 @@
 import { daysOfWeek, monthsOfYear } from "@app/momentConfig";
 import { RootState } from "@app/store"
 import { createSlice } from "@reduxjs/toolkit"
+import { add, subtract } from "@shared/calendar/utils";
 import moment from "moment"
 
 moment.defineLocale("ru", {
@@ -10,7 +11,7 @@ moment.defineLocale("ru", {
     monthsMin: monthsOfYear.map((month) => month.slice(0, 3)),
 });
 
-type State = {
+export type State = {
     day: string,
     fullDate: string,
     monthYear: string,
@@ -29,26 +30,10 @@ export const calendarSlice = createSlice({
     initialState,
     reducers: {
         next: (state, action) => {
-            if (state.selectedView === 'month') {
-                state.fullDate = moment(action.payload).clone().add(1, 'month').format('YYYY-MM-DD');
-                state.day = moment(action.payload).clone().add(1, 'month').format('D');
-                state.monthYear = moment(action.payload).clone().add(1, 'month').format('MMMM YYYY');
-            } else {
-                state.fullDate = moment(action.payload).clone().add(1, 'week').format('YYYY-MM-DD');
-                state.day = moment(action.payload).clone().add(1, 'week').format('D');
-                state.monthYear = moment(action.payload).clone().add(1, 'week').format('MMMM YYYY');
-            }
+            add(state, action.payload);
         },
         previous: (state, action) => {
-            if (state.selectedView === 'month') {
-                state.fullDate = moment(action.payload).clone().subtract(1, 'month').format('YYYY-MM-DD');
-                state.day = moment(action.payload).clone().subtract(1, 'month').format('D');
-                state.monthYear = moment(action.payload).clone().subtract(1, 'month').format('MMMM YYYY');  
-            } else {
-                state.fullDate = moment(action.payload).clone().subtract(1, 'week').format('YYYY-MM-DD');
-                state.day = moment(action.payload).clone().subtract(1, 'week').format('D');
-                state.monthYear = moment(action.payload).clone().subtract(1, 'week').format('MMMM YYYY');
-            }
+            subtract(state, action.payload);
         },
         current: (state) => {
             state.fullDate = moment().clone().format('YYYY-MM-DD');

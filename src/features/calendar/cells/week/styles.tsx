@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { WeekDaysWrapper } from "../calendarCellsMonth/styles";
+import { WeekDaysWrapper } from "../month/styles";
 
 type Props = {
     isweekend?: string,
