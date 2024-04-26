@@ -12,16 +12,12 @@ moment.defineLocale("ru", {
 });
 
 export type State = {
-    day: string,
     fullDate: string,
-    monthYear: string,
     selectedView: 'month' | 'week',
 }
 
 const initialState: State = {
-    day: moment().format('D'),
     fullDate: moment().format('YYYY-MM-DD'),
-    monthYear: moment().format('MMMM YYYY'),
     selectedView: 'month',
 }
 
@@ -37,8 +33,6 @@ export const calendarSlice = createSlice({
         },
         current: (state) => {
             state.fullDate = moment().clone().format('YYYY-MM-DD');
-            state.day = moment().clone().format('D');
-            state.monthYear = moment().clone().format('MMMM YYYY');
         },
         selectView: (state, action) => {
             state.selectedView = action.payload;
@@ -47,8 +41,6 @@ export const calendarSlice = createSlice({
 })
 
 export const { next, previous, current, selectView } = calendarSlice.actions;
-export const daySelector = (state: RootState) => state.calendar.day;
 export const fullDateSelector = (state: RootState) => state.calendar.fullDate;
-export const monthYearSelector = (state: RootState) => state.calendar.monthYear;
 export const viewSelector = (state: RootState) => state.calendar.selectedView;
 export default calendarSlice.reducer;

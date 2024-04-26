@@ -3,15 +3,15 @@ import { CalendarWrapper } from "./styles";
 import { useAppSelector } from "@shared/hooks/reduxHooks";
 import {
   fullDateSelector,
-  monthYearSelector,
   viewSelector,
 } from "@entities/calendar/model";
 import { CalendarCellsWeek } from "@features/calendar/cells/week";
 import { CalendarCellsMonth } from "@features/calendar/cells/month";
+import moment from "moment";
 
 export const CalendarEgar = () => {
   const currentDate = useAppSelector(fullDateSelector);
-  const currentMonthYear = useAppSelector(monthYearSelector);
+  const currentMonthYear = moment(currentDate).format('MMMM YYYY');
   const currentView = useAppSelector(viewSelector);
 
   return (

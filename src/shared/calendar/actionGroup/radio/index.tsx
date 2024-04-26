@@ -1,5 +1,5 @@
 import { Radio } from "antd";
-import { IHeaderData } from "@features/calendar/calendarHeader/mock";
+import { IHeaderData } from "@features/calendar/header/mock";
 import { useAppDispatch } from "@shared/hooks/reduxHooks";
 import { current, selectView } from "@entities/calendar/model";
 
